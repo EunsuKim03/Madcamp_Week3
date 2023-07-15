@@ -749,6 +749,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Adobe.Substance.Runtime.csproj">
+      <Project>{1c8976e9-85c6-5bf4-e142-d4935e3ceb40}</Project>
+      <Name>Adobe.Substance.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Adobe.SubstanceEditor.csproj">
+      <Project>{e8c25769-0955-a7ea-4978-c37bb5e0d35d}</Project>
+      <Name>Adobe.SubstanceEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Adobe.Substance.csproj">
+      <Project>{12fc5219-0392-c967-4f4f-68073855bd2e}</Project>
+      <Name>Adobe.Substance</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
