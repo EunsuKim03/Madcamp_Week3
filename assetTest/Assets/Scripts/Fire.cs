@@ -35,7 +35,7 @@ public class Fire : MonoBehaviour
     }
 
     // 투사체 방식으로 날라가는 총알
-    private void shotBullet() {
+    public void shotBullet() {
         // bulletFactory에서 bullet을 하나 생성한다.
         GameObject bullet = Instantiate(bulletFactory);
 
@@ -46,7 +46,7 @@ public class Fire : MonoBehaviour
     }
 
     // 히트스캔 방식으로 처리됨
-    private void shotHitScan() {
+    public void shotHitScan() {
         // Ray: 카메라의 시선, 바라보는 방향
         // 레이의 위치와 방향을 카메라의 위치와 forward 방향으로 설정한다. 
         // (즉 현재의 화면 정중앙 및 내가 바라보는 방향)
