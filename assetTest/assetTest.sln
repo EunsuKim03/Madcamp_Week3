@@ -1,6 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adobe.Substance", "Adobe.Substance.csproj", "{12fc5219-0392-c967-4f4f-68073855bd2e}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adobe.SubstanceEditor", "Adobe.SubstanceEditor.csproj", "{e8c25769-0955-a7ea-4978-c37bb5e0d35d}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adobe.Substance.Runtime", "Adobe.Substance.Runtime.csproj", "{1c8976e9-85c6-5bf4-e142-d4935e3ceb40}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{e14782ca-88f1-3d44-ef12-7e2e0ea4acd9}"
 EndProject
 Global
@@ -8,6 +14,12 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12fc5219-0392-c967-4f4f-68073855bd2e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12fc5219-0392-c967-4f4f-68073855bd2e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e8c25769-0955-a7ea-4978-c37bb5e0d35d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e8c25769-0955-a7ea-4978-c37bb5e0d35d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1c8976e9-85c6-5bf4-e142-d4935e3ceb40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1c8976e9-85c6-5bf4-e142-d4935e3ceb40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e14782ca-88f1-3d44-ef12-7e2e0ea4acd9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{e14782ca-88f1-3d44-ef12-7e2e0ea4acd9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
