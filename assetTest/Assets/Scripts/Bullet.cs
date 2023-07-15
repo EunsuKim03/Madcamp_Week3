@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
 {
     // 총알이 날라가는 속도
     public float bulletSpeed = 1000;
+    float lifeTime;
 
     // Start is called before the first frame update
     void Start()
@@ -17,12 +18,16 @@ public class Bullet : MonoBehaviour
         // AddForce: 오브젝트에 일정한 힘을 주어 이동시킨다.
         // transform.forward: 현재 객체가 바라보는 방향을 가리킨다. (world가 아닌 local)
         GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed);
+        lifeTime = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        lifeTime += Time.deltaTime;
+        if (lifeTime >= 30) {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other) {
