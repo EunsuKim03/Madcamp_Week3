@@ -7,14 +7,15 @@ using UnityEngine;
 public class Meteor : MonoBehaviour
 {
     float meteorLifeTime; // 적이 스폰된 이후부터 시간이 얼마나 지났는지를 나타낸다.
-    public float meteorSpeedMin = 900; // 메테오가 날라오는 속도
-    public float meteorSpeedMax = 1300;
+    public float meteorSpeedMin = 200; // 메테오가 날라오는 속도
+    public float meteorSpeedMax = 700;
     public float meteorScaleMin = 7; // 메테오 크기 (스케일)
     public float meteorScaleMax = 12;
     float meteorScale;
     public float meteorLifeTimeLimit = 40f; // 메테오의 수명이 끝나면 사라진다.
     public GameObject explosion; // 메테오 적중시 폭발
     public GameObject body; // 메테오 몸체
+    bool isShot = false;
 
     // Start is called before the first frame update
     void Start()
@@ -51,8 +52,9 @@ public class Meteor : MonoBehaviour
     private void OnTriggerEnter(Collider other) 
     {
         // 만약 총알이 적을 맞추면, 점수가 올라가고 적이 사라진다.
-        if (other.gameObject.CompareTag("Bullet")) 
+        if (other.gameObject.CompareTag("Bullet"))
         {
+            isShot = true;
             Destroy(other.gameObject); // 총알 삭제
 
             int meteorScore = (int) (1000 / (meteorScale * meteorScale)); // 메테오의 크기가 클수록 점수가 작다.
@@ -65,9 +67,10 @@ public class Meteor : MonoBehaviour
         }
 
         // 만약 플레이어가 메테오에 맞으면, 게임 오버가 된다.
-        else if (other.gameObject.CompareTag("Player"))
+        else if (other.gameObject.CompareTag("Player") && isShot == false)
         {
             GameManager.isGameOver = true;
+            Debug.Log("Game Over");
         }
     }
 

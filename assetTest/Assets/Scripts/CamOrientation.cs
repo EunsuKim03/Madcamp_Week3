@@ -14,8 +14,8 @@ public class CamOrientation : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         mouseZ += Input.GetAxis("Mouse Y") * mouseSpeed;
-        mouseZ = Mathf.Clamp(mouseZ, -5.0f, 40.0f);
-        transform.localEulerAngles = new Vector3(-mouseZ - 5, -90, 0);
+        mouseZ = Mathf.Clamp(mouseZ, -10.0f, 40.0f);
+        transform.localEulerAngles = new Vector3(-mouseZ - 10, -90, 0);
         
     }
 }

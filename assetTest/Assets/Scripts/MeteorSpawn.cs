@@ -12,15 +12,17 @@ public class MeteorSpawn : MonoBehaviour
     public Transform meteorSpawnPosition; // 메테오를 생성하여 위치시키는 기준 장소 (구 중심)
 
     // 메테오가 스폰되는 주기
-    public float spawnPeriod = 2f;
+    public float spawnPeriod = 5.0f;
     // 메테오가 스폰된 이후로 지난 시간
     float spawnTime;
     // meteorSpawnPosition을 중심으로 반지름 radius의 범위 내에서 메테오가 랜덤으로 스폰된다.
-    public float spawnRadius = 80f;
+    public float spawnRadius = 100f;
 
     // Start is called before the first frame update
     void Start()
     {
+        float temp = 5.0f * (1 - GameManager.timeSurvived / GameManager.limitTimer);
+        spawnPeriod = (temp > 2.0f) ? (temp) : (2.0f);
         spawnTime = 0;
         meteorFactory = new GameObject[4] {meteorFactory1, meteorFactory2, meteorFactory3, meteorFactory4};
     }
@@ -45,7 +47,7 @@ public class MeteorSpawn : MonoBehaviour
         Vector3 randSpherePos = Random.insideUnitSphere * spawnRadius; 
 
         // 랜덤 위치의 y가 항상 양수가 되도록 한다. (플레이어가 아래를 볼 수 없으므로)
-        randSpherePos.y = (randSpherePos.y > 0) ? randSpherePos.y + 20 : randSpherePos.y * -1 + 20;
+        randSpherePos.y = (randSpherePos.y > 0) ? randSpherePos.y + 22 : randSpherePos.y * -1 + 22;
 
         // 만약 생성 위치와 플레이어 사이의 거리가 너무 가까우면, 거리를 2배로 늘린다.
         if (randSpherePos.x * randSpherePos.x + randSpherePos.y * randSpherePos.y + randSpherePos.z * randSpherePos.z < spawnRadius * spawnRadius / 4) {

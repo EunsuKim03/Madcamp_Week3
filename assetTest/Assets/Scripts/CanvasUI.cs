@@ -28,11 +28,11 @@ public class CanvasUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timerText.text = ((int)GameManager.remainTime).ToString();
+        timerText.text = ((int)GameManager.timeSurvived).ToString();
         scoreText.text = GameManager.gameScore.ToString();
         bulletCountText.text = GameManager.bulletCount.ToString();
     
-        timerBar.fillAmount = GameManager.remainTime / GameManager.remainTimeLimit;
+        timerBar.fillAmount = GameManager.timeSurvived / GameManager.limitTimer;
 
         Vector2 newBulletBarSize = new Vector2(300 * ((float)GameManager.bulletCount / GameManager.bulletCountLimit), 10);
         bulletBar.rectTransform.sizeDelta = newBulletBarSize;
