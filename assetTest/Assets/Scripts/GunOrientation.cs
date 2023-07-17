@@ -14,8 +14,8 @@ public class GunOrientation : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         mouseZ += Input.GetAxis("Mouse Y") * mouseSpeed;
-        mouseZ = Mathf.Clamp(mouseZ, -5f, 40.0f);
-        transform.localEulerAngles = new Vector3(0, -5, -10 - mouseZ);
+        mouseZ = Mathf.Clamp(mouseZ, -10f, 40.0f);
+        transform.localEulerAngles = new Vector3(0, -10, -10 - mouseZ);
         
     }
 }
