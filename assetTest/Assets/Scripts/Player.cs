@@ -14,17 +14,19 @@ public class Player : MonoBehaviour
     public GameObject gunFire; // 총구 화염    
     // 히트스캔 방식
     public GameObject bulletEffect; // 시선이 닿은 곳에 생길 이펙트
-    ParticleSystem psBullet; // 파티클 시스템 --> Effect
-    AudioSource asBullet; // 이펙트 사운드
+    // ParticleSystem psBullet; // 파티클 시스템 --> Effect
+    // AudioSource asBullet; // 이펙트 사운드
 
     private int shotCounter = 0;
     public int shotDelay;
 
+    float reloadTime; // 장전하느라 소비 중인 시간
+
 
     // Start is called before the first frame update
     void Start() {
-        psBullet = bulletEffect.GetComponent<ParticleSystem>();
-        asBullet = bulletEffect.GetComponent<AudioSource>();
+        // psBullet = bulletEffect.GetComponent<ParticleSystem>();
+        // asBullet = bulletEffect.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,26 +35,34 @@ public class Player : MonoBehaviour
         transform.eulerAngles = new Vector3(0, mouseX, 0);
 
         // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.
-        if (Input.GetMouseButtonDown(0)) {
+        if (!GameManager.isReloading && Input.GetMouseButtonDown(0)) {
             playerAnimator.SetBool("fire", true);
             shotBullet();
             shotCounter = 1;
-        } else if (Input.GetMouseButton(0) && shotCounter == shotDelay) {
+        } else if (!GameManager.isReloading && Input.GetMouseButton(0) && shotCounter == shotDelay) {
             shotBullet();
         }
 
-        if (Input.GetMouseButtonUp(0)) {
+        if (!GameManager.isReloading && Input.GetMouseButtonUp(0)) {
             playerAnimator.SetBool("fire", false);
             shotCounter = 0;
         }
 
         // 마우스 오른쪽 버튼 클릭 시 히트스캔 방식이 적용된다.
-        if (Input.GetButtonDown("Fire2")) {
+        if (!GameManager.isReloading && Input.GetButtonDown("Fire2")) {
             shotHitScan();
         }
 
         if (shotCounter > 0) {
             shotCounter = (shotCounter >= shotDelay) ? (1) : (shotCounter + 1);
+        }
+
+        // R 버튼을 누르거나 장탄 수가 0이 되면 재장전이 된다.
+        if (!GameManager.isReloading && 
+            GameManager.bulletCount != GameManager.bulletCountLimit &&
+            Input.GetKeyDown(KeyCode.R) || GameManager.bulletCount == 0) 
+        {
+            GameManager.isReloading = true;
         }
 
     }
@@ -69,6 +79,9 @@ public class Player : MonoBehaviour
         // 총알이 날라가는 방향을 총구의 방향과 일치시킨다.
         bullet.transform.position = firePosition.position;
         bullet.transform.forward = firePosition.forward;
+
+        // 현재의 총알 개수를 하나 감소한다.
+        GameManager.bulletCount--;
     }
 
     // 히트스캔 방식으로 처리됨
@@ -94,8 +107,8 @@ public class Player : MonoBehaviour
             bulletEffect.transform.forward = hitInfo.normal; // 부딪힌 표면의 법선 방향으로 설정
 
             // 타격 이펙트 및 사운드 재생
-            psBullet.Play();
-            asBullet.Play();
+            // psBullet.Play();
+            // asBullet.Play();
         }
     }
 

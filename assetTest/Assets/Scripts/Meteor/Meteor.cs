@@ -6,16 +6,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Meteor : MonoBehaviour
 {
-    // 적이 스폰된 이후부터 시간이 얼마나 지났는지를 나타낸다.
-    float spawnTime;
+    float meteorLifeTime; // 적이 스폰된 이후부터 시간이 얼마나 지났는지를 나타낸다.
+    public int meteorScore = 10; // 메테오 하나를 맞출 때의 점수이다.
     public float meteorSpeed = 200;
+    public float meteorLifeTimeLimit = 20f; // 메테오의 수명이 끝나면 사라진다.
     public GameObject explosion; // 메테오 적중시 폭발
     public GameObject body; // 메테오 몸체
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnTime = 0f;
+        meteorLifeTime = 0f;
 
         // AddForce: 오브젝트에 일정한 힘을 주어 이동시킨다.
         // transform.forward: 현재 객체가 바라보는 방향을 가리킨다. (world가 아닌 local)
@@ -26,10 +27,10 @@ public class Meteor : MonoBehaviour
     void Update()
     {
         // 시간이 누적된다.
-        spawnTime += Time.deltaTime;
+        meteorLifeTime += Time.deltaTime;
 
         // 스폰된 이후로 일정 시간이 지나면 적이 자동으로 사라진다.
-        if (spawnTime >= 20.0) {
+        if (meteorLifeTime >= meteorLifeTimeLimit) {
             Destroy(gameObject);
         }
     }
@@ -38,9 +39,10 @@ public class Meteor : MonoBehaviour
     {
         // 만약 총알이 적을 맞추면, 점수가 올라가고 적이 사라진다.
         if (other.gameObject.CompareTag("Bullet")) {
-            explosion.SetActive(true);
-            Destroy(body);
-            Invoke("DisableExplosion", 1f);
+            GameManager.gameScore += meteorScore; // 점수 증가
+            explosion.SetActive(true); // 폭발 발생
+            Destroy(body); // 메테오 몸체 삭제
+            Invoke("DisableExplosion", 1f); // 1초 뒤 폭발 삭제
             Debug.Log("shot");
         }
     }
