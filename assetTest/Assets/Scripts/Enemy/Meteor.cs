@@ -9,6 +9,8 @@ public class Meteor : MonoBehaviour
     // 적이 스폰된 이후부터 시간이 얼마나 지났는지를 나타낸다.
     float spawnTime;
     public float meteorSpeed = 200;
+    public GameObject explosion; // 메테오 적중시 폭발
+    public GameObject body; // 메테오 몸체
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +38,16 @@ public class Meteor : MonoBehaviour
     {
         // 만약 총알이 적을 맞추면, 점수가 올라가고 적이 사라진다.
         if (other.gameObject.CompareTag("Bullet")) {
+            explosion.SetActive(true);
+            Destroy(body);
+            Invoke("DisableExplosion", 1f);
             Debug.Log("shot");
-            Destroy(gameObject);
         }
     }
 
-    
+    void DisableExplosion() {
+        explosion.SetActive(false);
+        Destroy(gameObject);
+    }    
 }
+
