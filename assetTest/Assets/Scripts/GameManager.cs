@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,17 @@ public class GameManager : MonoBehaviour
     public static int bulletCountLimit = 30; // 최대 탄창 개수 (한 탄창 당 총알이 몇 발인지)
     public static float reloadTimeLimit = 2f; // 장전하는데 걸리는 시간 (장전 딜레이)
 
+    public GameObject pauseUI; // 일시정지 UI
+
+    public GameObject player; // 플레이어 
+    
+    public Camera mainCam; // 메인 캠
+    public Camera subCam; // 서브 캠
+    public GameObject subCamObj; // 서브 캠 오브젝트
+    public Canvas canvas; // 캔버스
+    public Button exitButton; // 나가기 버튼
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +34,8 @@ public class GameManager : MonoBehaviour
         bulletCount = 30;
         isGameOver = false;
         isReloading = false;
+
+        exitButton.onClick.AddListener(OnClickExitButton);
     }
 
     // Update is called once per frame
@@ -34,5 +48,28 @@ public class GameManager : MonoBehaviour
         if (bulletCount < 0) {
             bulletCount = 30;
         }
+
+        // ESC 눌렀을 시 pause
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (pauseUI.activeSelf) {
+                subCamObj.SetActive(false);
+                pauseUI.SetActive(false);
+                player.SetActive(true);
+                canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                canvas.worldCamera = mainCam;
+                Time.timeScale = 1f;
+            } else {
+                subCamObj.SetActive(true);
+                canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                canvas.worldCamera = subCam;
+                pauseUI.SetActive(true);
+                player.SetActive(false);
+                Time.timeScale = 0f;
+            }
+        }
+    }
+
+    void OnClickExitButton() {
+        Application.Quit();
     }
 }
