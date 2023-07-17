@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks
 {
     float mouseX = 0f;
 
@@ -22,6 +24,11 @@ public class Player : MonoBehaviour
 
     float reloadTime; // 장전하느라 소비 중인 시간
 
+    // 플레이어 사이의 동기화를 위한 것이다.
+    // 어떤 플레이어가 이동하면, PhotonView를 통해서 이를 관찰한다.
+    // 관찰한 결과가 다른 컴퓨터의 해당 플레이어 클론들에게 동기화된다.
+    public PhotonView PV;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -30,7 +37,17 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update() 
+    {
+        if (PV.IsMine) // 나의 것이다.
+        { 
+            PV.RPC("synchronize", RpcTarget.All); 
+        }
+    }
+
+    [PunRPC]
+    void synchronize()
+    {
         mouseX += Input.GetAxis("Mouse X") * 10;
         transform.eulerAngles = new Vector3(0, mouseX, 0);
 
@@ -64,7 +81,6 @@ public class Player : MonoBehaviour
         {
             GameManager.isReloading = true;
         }
-
     }
 
     // 투사체 방식으로 날라가는 총알
