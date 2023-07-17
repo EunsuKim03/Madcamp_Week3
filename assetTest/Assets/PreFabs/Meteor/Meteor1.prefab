@@ -14621,7 +14621,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df39e87d2c6eaa248bd985964ccc8d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meteorScore: 10
   meteorSpeed: 200
+  meteorLifeTimeLimit: 20
   explosion: {fileID: 551744924071334303}
   body: {fileID: 6732132199088245887}
 --- !u!135 &2830500807503055124

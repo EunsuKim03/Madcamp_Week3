@@ -15,6 +15,6 @@ public class StartSceneManager : MonoBehaviour {
     }
 
     private void OnStartButtonClick() {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("jiwoo");
     }
 }

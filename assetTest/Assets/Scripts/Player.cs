@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public GameObject gunFire; // 총구 화염    
     // 히트스캔 방식
-    public GameObject bulletEffect; // 시선이 닿은 곳에 생길 이펙트
+    // public GameObject bulletEffect; // 시선이 닿은 곳에 생길 이펙트
     // ParticleSystem psBullet; // 파티클 시스템 --> Effect
     // AudioSource asBullet; // 이펙트 사운드
 
@@ -103,8 +103,8 @@ public class Player : MonoBehaviour
             hitInfo.transform.GetComponent<MeshRenderer>().material.color = Color.red;
             
             // 이펙트가 발생할 지점을 타격 지점으로 설정한다.
-            bulletEffect.transform.position = hitInfo.point;
-            bulletEffect.transform.forward = hitInfo.normal; // 부딪힌 표면의 법선 방향으로 설정
+            // bulletEffect.transform.position = hitInfo.point;
+            // bulletEffect.transform.forward = hitInfo.normal; // 부딪힌 표면의 법선 방향으로 설정
 
             // 타격 이펙트 및 사운드 재생
             // psBullet.Play();

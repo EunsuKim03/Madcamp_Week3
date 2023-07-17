@@ -14,6 +14,7 @@ public class CanvasUI : MonoBehaviour
 
     public Image timerBar;
     public Image bulletBar;
+    public Image reloadingBar;
 
     float reloadTime;
 
@@ -21,6 +22,7 @@ public class CanvasUI : MonoBehaviour
     void Start()
     {
         bulletFullText.text = "/" + GameManager.bulletCountLimit.ToString();
+        reloadingBar.fillAmount = 0;
     }
 
     // Update is called once per frame
@@ -36,8 +38,17 @@ public class CanvasUI : MonoBehaviour
         bulletBar.rectTransform.sizeDelta = newBulletBarSize;
         // timerBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 300);
 
+        // 장전하는 중이다.
         if (GameManager.isReloading) {
+            // 장전하기 시작하면 reloadingBar을 보이게 한다.
+            if (reloadTime == 0) {
+                reloadingBar.fillAmount = 1;
+            }
+            // 시간이 지나면서 reloadingBar의 길이가 줄어든다.
             reloadTime += Time.deltaTime;
+            reloadingBar.fillAmount = 1 - (reloadTime / GameManager.reloadTimeLimit);
+
+            // 만약 장전이 끝나면, 탄창을 다 채우고 시간을 초기화한다.
             if (reloadTime >= GameManager.reloadTimeLimit) {
                 GameManager.bulletCount = GameManager.bulletCountLimit;
                 reloadTime = 0f;
