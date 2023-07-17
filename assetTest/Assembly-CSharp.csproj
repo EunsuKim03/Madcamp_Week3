@@ -44,13 +44,35 @@
      <Compile Include="Assets\Scripts\Enemy\Meteor.cs" />
      <Compile Include="Assets\Scripts\CamOrientation.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
+     <Compile Include="Assets\Scripts\StartSceneManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\GunOrientation.cs" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <None Include="Assets\Meteor\Prefab\Materials\AdditiveTintable.shader" />
      <None Include="Assets\AHProxy\PlanetShader\Shader\PlanetShaderHi.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\AHProxy\PlanetShader\Shader\PlanetRingShader.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\AHProxy\PlanetShader\Shader\PlanetShaderMobile.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <Reference Include="UnityEngine">
         <HintPath>F:\UnityEditor\2022.3.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -756,13 +778,13 @@
       <Project>{1c8976e9-85c6-5bf4-e142-d4935e3ceb40}</Project>
       <Name>Adobe.Substance.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="Adobe.SubstanceEditor.csproj">
-      <Project>{e8c25769-0955-a7ea-4978-c37bb5e0d35d}</Project>
-      <Name>Adobe.SubstanceEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="Adobe.Substance.csproj">
       <Project>{12fc5219-0392-c967-4f4f-68073855bd2e}</Project>
       <Name>Adobe.Substance</Name>
+    </ProjectReference>
+    <ProjectReference Include="Adobe.SubstanceEditor.csproj">
+      <Project>{e8c25769-0955-a7ea-4978-c37bb5e0d35d}</Project>
+      <Name>Adobe.SubstanceEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
