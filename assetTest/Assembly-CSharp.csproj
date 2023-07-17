@@ -41,11 +41,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Enemy\MeteorSpawn.cs" />
+     <Compile Include="Assets\Scripts\CanvasUI.cs" />
      <Compile Include="Assets\Scripts\Enemy\Meteor.cs" />
      <Compile Include="Assets\Scripts\CamOrientation.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\StartSceneManager.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\GunOrientation.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
