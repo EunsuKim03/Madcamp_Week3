@@ -40,14 +40,17 @@
     <Analyzer Include="F:\UnityEditor\2022.3.4f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Fireworks\Firecracker 3\Script\Firecracker3.cs" />
+     <Compile Include="Assets\Scripts\Enemy\MeteorSpawn.cs" />
+     <Compile Include="Assets\Scripts\Enemy\Meteor.cs" />
      <Compile Include="Assets\Scripts\CamOrientation.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
-     <Compile Include="Assets\Fireworks\Firecracker 1\Script\Firecracker1.cs" />
      <Compile Include="Assets\Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\GunOrientation.cs" />
-     <Compile Include="Assets\Fireworks\Firecracker 2\Script\Firecracker2.cs" />
+     <None Include="Assets\Meteor\Prefab\Materials\AdditiveTintable.shader" />
+     <None Include="Assets\AHProxy\PlanetShader\Shader\PlanetShaderHi.shader" />
+     <None Include="Assets\AHProxy\PlanetShader\Shader\PlanetRingShader.shader" />
+     <None Include="Assets\AHProxy\PlanetShader\Shader\PlanetShaderMobile.shader" />
     <Reference Include="UnityEngine">
         <HintPath>F:\UnityEditor\2022.3.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -749,6 +752,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Adobe.Substance.Runtime.csproj">
+      <Project>{1c8976e9-85c6-5bf4-e142-d4935e3ceb40}</Project>
+      <Name>Adobe.Substance.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Adobe.SubstanceEditor.csproj">
+      <Project>{e8c25769-0955-a7ea-4978-c37bb5e0d35d}</Project>
+      <Name>Adobe.SubstanceEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Adobe.Substance.csproj">
+      <Project>{12fc5219-0392-c967-4f4f-68073855bd2e}</Project>
+      <Name>Adobe.Substance</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     private int shotCounter = 0;
     public int shotDelay;
 
+    float reloadTime;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -33,21 +35,21 @@ public class Player : MonoBehaviour
         transform.eulerAngles = new Vector3(0, mouseX, 0);
 
         // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.
-        if (Input.GetMouseButtonDown(0)) {
+        if (!GameManager.isReloading && Input.GetMouseButtonDown(0)) {
             playerAnimator.SetBool("fire", true);
             shotBullet();
             shotCounter = 1;
-        } else if (Input.GetMouseButton(0) && shotCounter == shotDelay) {
+        } else if (!GameManager.isReloading && Input.GetMouseButton(0) && shotCounter == shotDelay) {
             shotBullet();
         }
 
-        if (Input.GetMouseButtonUp(0)) {
+        if (!GameManager.isReloading && Input.GetMouseButtonUp(0)) {
             playerAnimator.SetBool("fire", false);
             shotCounter = 0;
         }
 
         // 마우스 오른쪽 버튼 클릭 시 히트스캔 방식이 적용된다.
-        if (Input.GetButtonDown("Fire2")) {
+        if (!GameManager.isReloading && Input.GetButtonDown("Fire2")) {
             shotHitScan();
         }
 
@@ -55,6 +57,13 @@ public class Player : MonoBehaviour
             shotCounter = (shotCounter >= shotDelay) ? (1) : (shotCounter + 1);
         }
 
+        // R 버튼을 누르거나 장탄 수가 0이 되면 재장전이 된다.
+        if (!GameManager.isReloading && 
+            GameManager.bulletCount != GameManager.bulletCountLimit &&
+            Input.GetKeyDown(KeyCode.R) || GameManager.bulletCount == 0) 
+        {
+            GameManager.isReloading = true;
+        }
     }
 
     // 투사체 방식으로 날라가는 총알
@@ -69,6 +78,9 @@ public class Player : MonoBehaviour
         // 총알이 날라가는 방향을 총구의 방향과 일치시킨다.
         bullet.transform.position = firePosition.position;
         bullet.transform.forward = firePosition.forward;
+
+        // 현재의 총알 개수를 하나 감소한다.
+        GameManager.bulletCount--;
     }
 
     // 히트스캔 방식으로 처리됨
@@ -105,5 +117,4 @@ public class Player : MonoBehaviour
         // 이펙트를 포함한 게임 오브젝트 비활성화
         gunFire.SetActive(false);
     }
-
 }
