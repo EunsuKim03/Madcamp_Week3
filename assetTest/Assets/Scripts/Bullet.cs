@@ -31,10 +31,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
+/*
     private void OnTriggerEnter(Collider other) {
         // 만약 총알이 벽이나 바닥에 닿으면, 1초 뒤에 이 총알을 삭제한다.
         if (other.gameObject.CompareTag("Wall")) {
             Destroy(gameObject, 1);
         }
-    }
+    }*/
 }
