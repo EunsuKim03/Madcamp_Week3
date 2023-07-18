@@ -3,7 +3,24 @@ guid: f40f864bc80373f42adc423fb297e415
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - URL: {fileID: 11400000, guid: 1557980c773d0804e824ba1420741dc7, type: 2}
+  - User: {fileID: 11400000, guid: f8f19ee7b94f6a4499b37fa6ec9ca5af, type: 2}
+  - moveToLogin: {instanceID: 0}
+  - moveToRegister: {instanceID: 0}
+  - menuUI: {instanceID: 0}
+  - loginUI: {instanceID: 0}
+  - registerUI: {instanceID: 0}
+  - loginId: {instanceID: 0}
+  - loginPw: {instanceID: 0}
+  - loginResultText: {instanceID: 0}
+  - loginDone: {instanceID: 0}
+  - loginBack: {instanceID: 0}
+  - registerId: {instanceID: 0}
+  - registerPw: {instanceID: 0}
+  - registerResultText: {instanceID: 0}
+  - registerDone: {instanceID: 0}
+  - registerBack: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

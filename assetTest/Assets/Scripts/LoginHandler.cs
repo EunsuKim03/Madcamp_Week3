@@ -32,6 +32,10 @@ public class LoginHandller : MonoBehaviour {
     public Button registerDone;
     public Button registerBack;
 
+    void Awake() {
+        User.id = "";
+        User.solo = 0;
+    }
     void Start() {
         moveToLogin.onClick.AddListener(OnMoveToLoginClicked);
         moveToRegister.onClick.AddListener(OnMoveToRegisterClicked);
@@ -71,6 +75,7 @@ public class LoginHandller : MonoBehaviour {
         password = password.Substring(0, password.Length - 1);
 
         PerformLogin(id, password);   
+        Invoke("delay", 1.0f);
     }
 
     void PerformLogin(string id, string password) {
@@ -82,7 +87,7 @@ public class LoginHandller : MonoBehaviour {
         var json = JsonConvert.SerializeObject(req);
         Debug.Log(json);
 
-
+        // Invoke("delay", 1.0f);
         StartCoroutine(RankMain.PostByIdPw(url, json, (raw) =>
         {
             SoloData res = JsonConvert.DeserializeObject<SoloData>(raw);
@@ -90,7 +95,12 @@ public class LoginHandller : MonoBehaviour {
                 Debug.LogFormat("Login Succeed: {0} : {1}", res.id, res.solo);
                 User.id = res.id;
                 User.solo = res.solo;
+                PlayerPrefs.SetString("id", res.id);
+                PlayerPrefs.SetInt("solo", res.solo);
+                PlayerPrefs.Save();
             }
+            // UnityEditor.EditorUtility.SetDirty(User);
+            // UnityEditor.AssetDatabase.SaveAssets();
 
             if (User.id == id) {
                 loginResultText.text = "Login successed!";
@@ -112,6 +122,7 @@ public class LoginHandller : MonoBehaviour {
         password = password.Substring(0, password.Length - 1);
 
         PerformRegister(id, password);
+        Invoke("delay", 1.0f);
     }
 
     void PerformRegister(string id, string password) {
@@ -135,6 +146,10 @@ public class LoginHandller : MonoBehaviour {
                 Debug.LogFormat("Register succeed");
                 User.id = id;
                 User.solo = 0;
+
+                PlayerPrefs.SetString("id", id);
+                PlayerPrefs.SetInt("solo", 0);
+                PlayerPrefs.Save();
 
                 SceneManager.LoadScene("StartScene");
             }

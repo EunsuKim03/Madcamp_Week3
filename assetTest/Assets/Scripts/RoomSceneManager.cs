@@ -6,11 +6,12 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using Newtonsoft.Json;
 
 public class RoomSceneManager : MonoBehaviourPunCallbacks
 {
     private readonly string version = "1.0"; // 이 게임의 버전
-    private string userId;
+    // private string userId;
 
     public Button enterButton; // 로비에서 방에 입장
     public Button backButton; // 로비에서 메뉴로 이동
@@ -24,6 +25,11 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
     public GameObject ready1; // 플레이어1 준비 상태
     public TextMeshProUGUI Player2Name; // 플레이어2 이름
     public GameObject ready2; // 플레이어2 준비 상태
+
+    // DuoData
+    public DuoObject duoObject;
+    public UserObject userObject;
+    public UrlObject URL;
     
 
     private void Awake() 
@@ -35,7 +41,7 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = version;
 
         // 유저 아이디 할당
-        PhotonNetwork.LocalPlayer.NickName = userId;
+        PhotonNetwork.LocalPlayer.NickName = userObject.id;
 
         // 포톤 서버와의 통신 속도 확인 (기본값: 초당 30회)
         PhotonNetwork.SendRate = 60;
@@ -49,6 +55,9 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     private void Start() 
     {
+        userObject.id = PlayerPrefs.GetString("id", "DefaultID");
+        Debug.Log("User ID: " + userObject.id);
+        userObject.solo = PlayerPrefs.GetInt("solo", 0);
         // enterButton = GetComponentInChildren<Button>();
         if (enterButton != null) {
             enterButton.onClick.AddListener(OnEnterButtonClick);
@@ -82,8 +91,10 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
         enterButton.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);
 
-        userId = Random.Range(0, 100).ToString();
-        PhotonNetwork.LocalPlayer.NickName = userId;
+        PhotonNetwork.LocalPlayer.NickName = userObject.id;
+
+        duoObject.id1 = userObject.id;
+
     }
 
     private void OnEnterButtonClick() { // 로비 -> 방
@@ -97,7 +108,7 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
     }
 
     private void OnReadyButtonClick() { // 방 -> 레디
-        if (Player1Name.text == userId) { // 내가 첫 번째이다.
+        if (Player1Name.text == userObject.id) { // 내가 첫 번째이다.
             if (ready1.activeSelf) {
                 ready1.SetActive(false); // 이미 레디를 했었으므로 해제한다.
                 photonView.RPC("SetReadyState", RpcTarget.All, 1, false);
@@ -180,11 +191,14 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
         // 룸에 접속한 사용자들의 정보 확인
         if (PhotonNetwork.PlayerListOthers.Length == 1) { // 이미 다른 사람이 있으므로, 나는 방장이 아닌 참가자이다.
             Player1Name.text = PhotonNetwork.PlayerListOthers[0].NickName.ToString();
-            Player2Name.text = userId;
+            Player2Name.text = userObject.id;
             Player2Name.color = Color.yellow;
+
+            duoObject.id2 = Player1Name.text;
+
         }
         else { // 내가 방장이다.
-            Player1Name.text = userId;
+            Player1Name.text = userObject.id;
             Player1Name.color = Color.yellow;
         }
         Lobby.SetActive(false);
@@ -198,10 +212,12 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
         Debug.Log("새로운 플레이어가 방에 들어왔다: " + newPlayer.NickName);
         if (Player1Name.text == "") {
             Player1Name.text = newPlayer.NickName;
+            duoObject.id2 = newPlayer.NickName;
             photonView.RPC("SetReadyState", RpcTarget.All, 2, ready2.activeSelf);
         }
         else {
             Player2Name.text = newPlayer.NickName;
+            duoObject.id2 = newPlayer.NickName;
             photonView.RPC("SetReadyState", RpcTarget.All, 1, ready1.activeSelf);
         }
     }
@@ -210,7 +226,7 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         if (Player1Name.text == otherPlayer.NickName) { // 이제 내가 방장이 된다.
-            Player1Name.text = userId;
+            Player1Name.text = userObject.id;
             Player1Name.color = Color.yellow;
             ready1.SetActive(ready2.activeSelf);
 
@@ -270,6 +286,25 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
 
     [PunRPC]
     private void StartGame() {
+
+        var url = string.Format("{0}/{1}", URL.host, URL.urlPostDuo);
+
+        var req = new Protocols.Packets.req_PostDuo();
+        req.id1 = duoObject.id1;
+        req.id2 = duoObject.id2;
+        var json = JsonConvert.SerializeObject(req);
+        Debug.Log(json);
+
+
+        StartCoroutine(RankMain.PostDuo(url, json, (raw) =>
+        {
+            Protocols.Packets.res_PostDuo res = JsonConvert.DeserializeObject<Protocols.Packets.res_PostDuo>(raw);
+            if (res != null) {
+                Debug.LogFormat("DuoScore: {0} & {1} -> {2}", req.id1, req.id2, res.duoScore);
+                duoObject.duoScore = res.duoScore;
+            }
+        }));
+
         SceneManager.LoadScene("jiwoo");
     }
 }

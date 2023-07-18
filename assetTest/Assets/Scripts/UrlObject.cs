@@ -8,5 +8,6 @@ public class UrlObject : ScriptableObject {
     public string urlLogin;
     public string urlRegister;
     public string urlUpdateSolo;
+    public string urlPostDuo;
     public string urlUpdateDuo;
 }

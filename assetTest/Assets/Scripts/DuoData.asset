@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94624f1e712ead4fb81b857fb197407, type: 3}
-  m_Name: URL
+  m_Script: {fileID: 11500000, guid: 8ff6721dc1d1c0444b06aa4019bd97e8, type: 3}
+  m_Name: DuoData
   m_EditorClassIdentifier: 
-  host: localhost:3000
-  urlGetAll_Id: id
-  urlGetAll_Duo: duo
-  urlLogin: id/login
-  urlRegister: id/register
-  urlUpdateSolo: id/update
-  urlPostDuo: duo/score
-  urlUpdateDuo: duo/update
+  id1: 
+  id2: 
+  duoScore: 0

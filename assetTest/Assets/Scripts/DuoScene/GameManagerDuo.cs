@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using Newtonsoft.Json;
 
 public class GameManagerDuo : MonoBehaviourPunCallbacks
 {
@@ -32,11 +33,15 @@ public class GameManagerDuo : MonoBehaviourPunCallbacks
     public GameObject overUI; // 게임오버 UI
     public Button restartButton; // 재시작 버튼
 
+    // DuoData
+    public DuoObject duoObject;
+    public UrlObject URL;
+
 
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         // 플레이어를 생성한다.
         int pos = PhotonNetwork.IsMasterClient ? 3 : -3;
         PhotonNetwork.Instantiate("BananaManDuo", new Vector3(pos, 0, pos), Quaternion.identity);
@@ -102,10 +107,30 @@ public class GameManagerDuo : MonoBehaviourPunCallbacks
     void GameOver() {
         Debug.Log(PhotonNetwork.NetworkClientState);
         overUI.SetActive(true);
-        player.SetActive(false);
         subCamObj.SetActive(true);
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = subCam;
+
+        if (gameScore > duoObject.duoScore) {
+            duoObject.duoScore = gameScore;
+
+            var url = string.Format("{0}/{1}", URL.host, URL.urlUpdateDuo);
+
+            var req = new Protocols.Packets.req_UpdateDuo();
+            req.id1 = duoObject.id1;
+            req.id2 = duoObject.id2;
+            req.newScore = gameScore;
+            var json = JsonConvert.SerializeObject(req);
+            Debug.Log(json);
+
+            StartCoroutine(RankMain.UpdateDuo(url, json, (raw) =>
+            {
+                Debug.LogFormat("UPDATED {0} & {1} -> {2}", duoObject.id1, duoObject.id2, gameScore);
+            }));
+
+        }
+
+        player.SetActive(false);
         Time.timeScale = 0f;
     }
 

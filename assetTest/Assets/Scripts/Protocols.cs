@@ -30,8 +30,17 @@ public class Protocols
         public class res_UpdateSolo {
         }
 
+        public class req_PostDuo {
+            public string id1;
+            public string id2;
+        }
+        public class res_PostDuo {
+            public int duoScore;
+        }
+
         public class req_UpdateDuo {
-            public string id;
+            public string id1;
+            public string id2;
             public int newScore;
         }
         public class res_UpdateDuo {
