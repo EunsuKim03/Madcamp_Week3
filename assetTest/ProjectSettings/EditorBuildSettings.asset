@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/jiwoo.unity
     guid: 8a28668a2cab35c4f9f94eb873bc4efe
+  - enabled: 1
+    path: Assets/Scenes/LoginScene.unity
+    guid: b19aac03c6a208c4a8d3fbf87ce81da8
   m_configObjects: {}
