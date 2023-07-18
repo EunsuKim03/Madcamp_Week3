@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GunOrientation : MonoBehaviour {
-    float mouseSpeed = 10;
+    float mouseSpeed = StartSceneManager.mouseSpeed;
     float mouseZ = 0f;
 
     // Start is called before the first frame update
