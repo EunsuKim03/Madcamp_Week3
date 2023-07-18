@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public static bool isGameOver; // 게임 종료 여부
     public static bool isReloading; // 현재 장전중인지 아닌지
 
+    public static bool isMeteorSpawn = true; // 메테오를 스폰할 것인지 아닌지
+
     public static float limitTimer = 180f; // 타이머 UI가 꽉찰 때의 값
     public static int bulletCountLimit = 30; // 최대 탄창 개수 (한 탄창 당 총알이 몇 발인지)
     public static float reloadTimeLimit = 2f; // 장전하는데 걸리는 시간 (장전 딜레이)

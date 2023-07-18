@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: 7d19173b7444baf49a84f10f6984cb93
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/jiwoo.unity
-    guid: 8a28668a2cab35c4f9f94eb873bc4efe
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 34f619799273ef245ba34a1d23c39488
+  - enabled: 1
+    path: Assets/Scenes/jiwoo.unity
+    guid: 8a28668a2cab35c4f9f94eb873bc4efe
   m_configObjects: {}
