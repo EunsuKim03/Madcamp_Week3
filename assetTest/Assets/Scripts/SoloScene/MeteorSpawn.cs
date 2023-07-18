@@ -10,8 +10,10 @@ public class MeteorSpawn : MonoBehaviour
     public GameObject meteorFactory4; // 메테오 종류 4
     public GameObject[] meteorFactory;
 
-    // 메테오를 생성하여 위치시키는 기준 장소 (구 중심)
-    Vector3 meteorSpawnPosition = Vector3.zero; 
+    // 메테오를 생성하여 위치시키는 기준 장소 (사람 위치)
+    // Vector3 meteorSpawnPosition = Vector3.zero; 
+    public Transform meteorSpawnPosition;
+
     // 메테오가 스폰되는 주기
     public float spawnPeriod = 5.0f;
     // 메테오가 스폰된 이후로 지난 시간
@@ -64,7 +66,7 @@ public class MeteorSpawn : MonoBehaviour
         }
 
         // 실제 스폰 위치 = 기준 스폰 위치 + 상대적 랜덤 위치
-        Vector3 randEnemyPos = meteorSpawnPosition + randSpherePos;
+        Vector3 randEnemyPos = meteorSpawnPosition.position + randSpherePos;
 
         // meteorFactory에서 메테오를 하나 선택해서 생성한다.
         // 생성 위치는 randEnemyPos, 회전 방향은 기본값이다.
@@ -72,6 +74,6 @@ public class MeteorSpawn : MonoBehaviour
         GameObject enemy = Instantiate(meteorFactory[rand], randEnemyPos, Quaternion.identity);
 
         // 메테오가 구의 중심을 향해 날아가도록 한다. 
-        enemy.transform.forward = meteorSpawnPosition - randEnemyPos;
+        enemy.transform.forward = meteorSpawnPosition.position - randEnemyPos;
     }
 }

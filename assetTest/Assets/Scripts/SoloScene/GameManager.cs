@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,7 +27,11 @@ public class GameManager : MonoBehaviour
     public Button exitButton; // 나가기 버튼
     public GameObject overUI; // 게임오버 UI
     public Button restartButton; // 재시작 버튼
+    public GameObject newRecord; // 최고 점수 달성 시 뜨는 UI
 
+    // User Data
+    public UserObject userObject; // 유저 정보
+    public UrlObject URL; // URL 정보
 
 
     // Start is called before the first frame update
@@ -41,6 +46,7 @@ public class GameManager : MonoBehaviour
 
         exitButton.onClick.AddListener(OnClickExitButton);
         restartButton.onClick.AddListener(OnClickRestartButton);
+
     }
 
     // Update is called once per frame
@@ -49,7 +55,7 @@ public class GameManager : MonoBehaviour
         timeSurvived += Time.deltaTime;
 
         // ESC 눌렀을 시 pause
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (!isGameOver && Input.GetKeyDown(KeyCode.Escape)) {
             if (pauseUI.activeSelf) {
                 subCamObj.SetActive(false);
                 pauseUI.SetActive(false);
@@ -81,8 +87,32 @@ public class GameManager : MonoBehaviour
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = subCam;
         overUI.SetActive(true);
+
+        // 최고 점수 달성 시 서버 통해 DB에 업데이트
+        if (gameScore > userObject.solo) {
+            newRecord.SetActive(true);
+            userObject.solo = gameScore;
+
+            // 서버 통신
+            var url = string.Format("{0}/{1}", URL.host, URL.urlUpdateSolo);
+            Debug.Log(url);
+
+            var req = new Protocols.Packets.req_UpdateSolo();
+            req.id = userObject.id;
+            req.newScore = gameScore;
+            var json = JsonConvert.SerializeObject(req);
+            Debug.Log(json);
+
+            StartCoroutine(RankMain.UpdateSolo(url, json, (raw) => {
+                // var res = JsonConvert.DeserializeObject<Protocols.Packets.res>(raw);
+                Debug.LogFormat("UPDATED {0} -> {1}", req.id, gameScore);
+            }));
+        } else {
+            // newRecord.SetActive(false);
+        }
         player.SetActive(false);
         Time.timeScale = 0f;
+
     }
 
     void OnClickRestartButton() {
