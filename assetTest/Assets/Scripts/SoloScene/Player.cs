@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     float mouseX = 0f;
+    float mouseSpeed = StartSceneManager.mouseSpeed;
 
     public Animator playerAnimator;
 
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update() 
     { 
-        mouseX += Input.GetAxis("Mouse X") * 10;
+        mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
         transform.eulerAngles = new Vector3(0, mouseX, 0); 
 
         // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.

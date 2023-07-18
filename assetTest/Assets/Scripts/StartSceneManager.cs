@@ -3,12 +3,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartSceneManager : MonoBehaviour {
+
+    public static float mouseSpeed = 5;
     public Button startButton;
     public Button rankButton;
+    public Button senseButton;
+    public Slider senseBar;
+    public Button returnButton;
     public Button soloButton;
     public Button duoButton;
     public Button backButton;
     public GameObject StartUI;
+    public GameObject SenseUI;
     public GameObject ModeUI;
 
 
@@ -21,6 +27,16 @@ public class StartSceneManager : MonoBehaviour {
         // rankButton = GetComponentInChildren<Button>();
         if (rankButton != null) {
             rankButton.onClick.AddListener(OnRankButtonClick);
+        }
+
+        // senseButton = GetComponentInChildren<Button>();
+        if (senseButton != null) {
+            senseButton.onClick.AddListener(OnSenseButtonClick);
+        }
+
+        // returnButton = GetComponentInChildren<Button>();
+        if (returnButton != null) {
+            returnButton.onClick.AddListener(OnReturnButtonClick);
         }
 
         // soloButton = GetComponentInChildren<Button>();
@@ -38,6 +54,7 @@ public class StartSceneManager : MonoBehaviour {
             backButton.onClick.AddListener(OnBackButtonClick);
         }
         
+        senseBar.value = mouseSpeed;
     }
 
     private void OnStartButtonClick() {
@@ -47,6 +64,17 @@ public class StartSceneManager : MonoBehaviour {
 
     private void OnRankButtonClick() {
         SceneManager.LoadScene("RankScene");
+    }
+
+    private void OnSenseButtonClick() {
+        StartUI.SetActive(false);
+        SenseUI.SetActive(true);
+    }
+
+    private void OnReturnButtonClick() {
+        mouseSpeed = senseBar.value;
+        SenseUI.SetActive(false);
+        StartUI.SetActive(true);
     }
 
     private void OnSoloButtonClick() {
