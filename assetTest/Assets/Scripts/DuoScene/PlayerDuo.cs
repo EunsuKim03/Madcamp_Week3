@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class Player : MonoBehaviourPunCallbacks, IPunObservable
+public class PlayerDuo : MonoBehaviourPunCallbacks, IPunObservable
 {
     float mouseX = 0f;
 
@@ -20,7 +20,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     // AudioSource asBullet; // 이펙트 사운드
 
     private int shotCounter = 0;
-    public int shotDelay;
+    public int shotDelay = 60;
 
     float reloadTime; // 장전하느라 소비 중인 시간
 
@@ -41,7 +41,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         // 내 것이 아니면 카메라를 끈다.
         if (!PV.IsMine) camera.gameObject.SetActive(false);
         // 방장이 아니면 메테오 스폰을 끈다.
-        if (!PhotonNetwork.IsMasterClient) GameManager.isMeteorSpawn = false;
+        if (!PhotonNetwork.IsMasterClient) GameManagerDuo.isMeteorSpawn = false;
     }
 
     // Update is called once per frame
@@ -53,23 +53,23 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             transform.eulerAngles = new Vector3(0, mouseX, 0); 
 
             // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.
-            if (!GameManager.isReloading && Input.GetMouseButtonDown(0)) {
+            if (!GameManagerDuo.isReloading && Input.GetMouseButtonDown(0)) {
                 playerAnimator.SetBool("fire", true);
                 PV.RPC("shotBullet", RpcTarget.All); // 나와 나의 클론들이 총알을 발사한다.
-                GameManager.bulletCount--;
+                GameManagerDuo.bulletCount--;
                 shotCounter = 1;
-            } else if (!GameManager.isReloading && Input.GetMouseButton(0) && shotCounter == shotDelay) {
+            } else if (!GameManagerDuo.isReloading && Input.GetMouseButton(0) && shotCounter == shotDelay) {
                 PV.RPC("shotBullet", RpcTarget.All);
-                GameManager.bulletCount--;
+                GameManagerDuo.bulletCount--;
             }
 
-            if (!GameManager.isReloading && Input.GetMouseButtonUp(0)) {
+            if (!GameManagerDuo.isReloading && Input.GetMouseButtonUp(0)) {
                 playerAnimator.SetBool("fire", false);
                 shotCounter = 0;
             }            
 
             // 마우스 오른쪽 버튼 클릭 시 히트스캔 방식이 적용된다.
-            if (!GameManager.isReloading && Input.GetButtonDown("Fire2")) {
+            if (!GameManagerDuo.isReloading && Input.GetButtonDown("Fire2")) {
                 PV.RPC("shotHitScan", RpcTarget.All);
             }
 
@@ -78,11 +78,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             // R 버튼을 누르거나 장탄 수가 0이 되면 재장전이 된다.
-            if (!GameManager.isReloading && 
-                GameManager.bulletCount != GameManager.bulletCountLimit &&
-                Input.GetKeyDown(KeyCode.R) || GameManager.bulletCount == 0) 
+            if (!GameManagerDuo.isReloading && 
+                GameManagerDuo.bulletCount != GameManagerDuo.bulletCountLimit &&
+                Input.GetKeyDown(KeyCode.R) || GameManagerDuo.bulletCount == 0) 
             {
-                GameManager.isReloading = true;
+                GameManagerDuo.isReloading = true;
             } 
         }
     }
@@ -91,9 +91,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
         if (stream.IsWriting) // 나의 것이다.
         {
-            stream.SendNext(GameManager.timeSurvived);
-            stream.SendNext(GameManager.gameScore);
-            stream.SendNext(GameManager.isGameOver);
+            stream.SendNext(GameManagerDuo.timeSurvived);
+            stream.SendNext(GameManagerDuo.gameScore);
+            stream.SendNext(GameManagerDuo.isGameOver);
         }
         else // 남의 것이다. (stream.IsReading)
         {
@@ -101,9 +101,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             int receivedGameScore = (int)stream.ReceiveNext();
             bool receivedIsGameOver = (bool)stream.ReceiveNext();
 
-            if (!PhotonNetwork.IsMasterClient) GameManager.timeSurvived = receivedTimeSurvived;
-            if (GameManager.gameScore < receivedGameScore) GameManager.gameScore = receivedGameScore;
-            if (receivedIsGameOver) GameManager.isGameOver = receivedIsGameOver;
+            if (!PhotonNetwork.IsMasterClient) GameManagerDuo.timeSurvived = receivedTimeSurvived;
+            if (GameManagerDuo.gameScore < receivedGameScore) GameManagerDuo.gameScore = receivedGameScore;
+            if (receivedIsGameOver) GameManagerDuo.isGameOver = receivedIsGameOver;
         }
     }
 
@@ -114,11 +114,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         Invoke("DisableGunFire", 0.5f);
         
         // bulletFactory에서 bullet을 하나 생성한다.
-        GameObject bullet = Instantiate(bulletFactory);
+        GameObject bullet = PhotonNetwork.Instantiate("bulletDuo", firePosition.position, Quaternion.identity);
 
         // 생성된 bullet의 위치를 총구 위치로 지정한다.
         // 총알이 날라가는 방향을 총구의 방향과 일치시킨다.
-        bullet.transform.position = firePosition.position;
+        // bullet.transform.position = firePosition.position;
         bullet.transform.forward = firePosition.forward;
     }
 
