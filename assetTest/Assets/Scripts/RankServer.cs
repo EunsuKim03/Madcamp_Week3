@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 public class RankServer : MonoBehaviour {
     public UrlObject URL;
 
-    // SoloData[] soloDatas = new SoloData[9];
-    // DuoData[] duoDatas = new DuoData[9];
+    public Button backButton;
 
     public TextMeshProUGUI[] soloTexts;
 
@@ -19,16 +19,17 @@ public class RankServer : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         LoadRank();
+        backButton.onClick.AddListener(OnBackClicked);
     }
 
-    // Update is called once per frame
-    void Update() {
-        
+    void OnBackClicked() {
+        SceneManager.LoadScene("StartScene");
     }
 
     void LoadRank() {
         LoadSoloRank();
-        Invoke("LoadDuoRank", 1f);
+        // Invoke("LoadDuoRank", 3f);
+        LoadDuoRank();
     }
 
     void LoadSoloRank() {

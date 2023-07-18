@@ -441,6 +441,9 @@
     <Reference Include="unityplastic">
         <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Assets\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Android.Types">
         <HintPath>F:\UnityEditor\2022.3.4f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
     </Reference>

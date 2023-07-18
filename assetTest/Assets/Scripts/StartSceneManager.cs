@@ -46,7 +46,7 @@ public class StartSceneManager : MonoBehaviour {
     }
 
     private void OnRankButtonClick() {
-        
+        SceneManager.LoadScene("RankScene");
     }
 
     private void OnSoloButtonClick() {
