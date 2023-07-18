@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class Player : MonoBehaviourPunCallbacks
+public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     float mouseX = 0f;
 
@@ -29,11 +29,19 @@ public class Player : MonoBehaviourPunCallbacks
     // 관찰한 결과가 다른 컴퓨터의 해당 플레이어 클론들에게 동기화된다.
     public PhotonView PV;
 
+    public Camera camera;
+    public GameObject meteorSpawn;
+
 
     // Start is called before the first frame update
     void Start() {
         // psBullet = bulletEffect.GetComponent<ParticleSystem>();
         // asBullet = bulletEffect.GetComponent<AudioSource>();
+
+        // 내 것이 아니면 카메라를 끈다.
+        if (!PV.IsMine) camera.gameObject.SetActive(false);
+        // 방장이 아니면 메테오 스폰을 끈다.
+        if (!PhotonNetwork.IsMasterClient) GameManager.isMeteorSpawn = false;
     }
 
     // Update is called once per frame
@@ -41,49 +49,66 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (PV.IsMine) // 나의 것이다.
         { 
-            PV.RPC("synchronize", RpcTarget.All); 
+            mouseX += Input.GetAxis("Mouse X") * 10;
+            transform.eulerAngles = new Vector3(0, mouseX, 0); 
+
+            // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.
+            if (!GameManager.isReloading && Input.GetMouseButtonDown(0)) {
+                playerAnimator.SetBool("fire", true);
+                PV.RPC("shotBullet", RpcTarget.All); // 나와 나의 클론들이 총알을 발사한다.
+                GameManager.bulletCount--;
+                shotCounter = 1;
+            } else if (!GameManager.isReloading && Input.GetMouseButton(0) && shotCounter == shotDelay) {
+                PV.RPC("shotBullet", RpcTarget.All);
+                GameManager.bulletCount--;
+            }
+
+            if (!GameManager.isReloading && Input.GetMouseButtonUp(0)) {
+                playerAnimator.SetBool("fire", false);
+                shotCounter = 0;
+            }            
+
+            // 마우스 오른쪽 버튼 클릭 시 히트스캔 방식이 적용된다.
+            if (!GameManager.isReloading && Input.GetButtonDown("Fire2")) {
+                PV.RPC("shotHitScan", RpcTarget.All);
+            }
+
+            if (shotCounter > 0) {
+                shotCounter = (shotCounter >= shotDelay) ? (1) : (shotCounter + 1);
+            }
+
+            // R 버튼을 누르거나 장탄 수가 0이 되면 재장전이 된다.
+            if (!GameManager.isReloading && 
+                GameManager.bulletCount != GameManager.bulletCountLimit &&
+                Input.GetKeyDown(KeyCode.R) || GameManager.bulletCount == 0) 
+            {
+                GameManager.isReloading = true;
+            } 
         }
     }
 
-    [PunRPC]
-    void synchronize()
-    {
-        mouseX += Input.GetAxis("Mouse X") * 10;
-        transform.eulerAngles = new Vector3(0, mouseX, 0);        
 
-        // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.
-        if (!GameManager.isReloading && Input.GetMouseButtonDown(0)) {
-            playerAnimator.SetBool("fire", true);
-            shotBullet();
-            shotCounter = 1;
-        } else if (!GameManager.isReloading && Input.GetMouseButton(0) && shotCounter == shotDelay) {
-            shotBullet();
-        }
-
-        if (!GameManager.isReloading && Input.GetMouseButtonUp(0)) {
-            playerAnimator.SetBool("fire", false);
-            shotCounter = 0;
-        }
-
-        // 마우스 오른쪽 버튼 클릭 시 히트스캔 방식이 적용된다.
-        if (!GameManager.isReloading && Input.GetButtonDown("Fire2")) {
-            shotHitScan();
-        }
-
-        if (shotCounter > 0) {
-            shotCounter = (shotCounter >= shotDelay) ? (1) : (shotCounter + 1);
-        }
-
-        // R 버튼을 누르거나 장탄 수가 0이 되면 재장전이 된다.
-        if (!GameManager.isReloading && 
-            GameManager.bulletCount != GameManager.bulletCountLimit &&
-            Input.GetKeyDown(KeyCode.R) || GameManager.bulletCount == 0) 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.IsWriting) // 나의 것이다.
         {
-            GameManager.isReloading = true;
+            stream.SendNext(GameManager.timeSurvived);
+            stream.SendNext(GameManager.gameScore);
+            stream.SendNext(GameManager.isGameOver);
+        }
+        else // 남의 것이다. (stream.IsReading)
+        {
+            float receivedTimeSurvived = (float)stream.ReceiveNext();
+            int receivedGameScore = (int)stream.ReceiveNext();
+            bool receivedIsGameOver = (bool)stream.ReceiveNext();
+
+            if (!PhotonNetwork.IsMasterClient) GameManager.timeSurvived = receivedTimeSurvived;
+            if (GameManager.gameScore < receivedGameScore) GameManager.gameScore = receivedGameScore;
+            if (receivedIsGameOver) GameManager.isGameOver = receivedIsGameOver;
         }
     }
 
     // 투사체 방식으로 날라가는 총알
+    [PunRPC]
     public void shotBullet() {
         gunFire.SetActive(true);
         Invoke("DisableGunFire", 0.5f);
@@ -95,12 +120,10 @@ public class Player : MonoBehaviourPunCallbacks
         // 총알이 날라가는 방향을 총구의 방향과 일치시킨다.
         bullet.transform.position = firePosition.position;
         bullet.transform.forward = firePosition.forward;
-
-        // 현재의 총알 개수를 하나 감소한다.
-        GameManager.bulletCount--;
     }
 
     // 히트스캔 방식으로 처리됨
+    [PunRPC]
     public void shotHitScan() {
         // Ray: 카메라의 시선, 바라보는 방향
         // 레이의 위치와 방향을 카메라의 위치와 forward 방향으로 설정한다. 
