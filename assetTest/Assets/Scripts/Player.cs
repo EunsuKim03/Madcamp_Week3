@@ -39,17 +39,18 @@ public class Player : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update() 
     {
-        if (PV.IsMine) // 나의 것이다.
-        { 
-            PV.RPC("synchronize", RpcTarget.All); 
-        }
+        // if (PV.IsMine) // 나의 것이다.
+        // { 
+        //     PV.RPC("synchronize", RpcTarget.All); 
+        // }
+        synchronize();
     }
 
     [PunRPC]
     void synchronize()
     {
         mouseX += Input.GetAxis("Mouse X") * 10;
-        transform.eulerAngles = new Vector3(0, mouseX, 0);
+        transform.eulerAngles = new Vector3(0, mouseX, 0);        
 
         // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.
         if (!GameManager.isReloading && Input.GetMouseButtonDown(0)) {

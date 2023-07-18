@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{e8c25769-0955-a7ea-4978-c37bb5e0d35d}</ProjectGuid>
+    <ProjectGuid>{3e01acc5-f368-2687-4e49-cb7fba4e11c2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Adobe.SubstanceEditor</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -40,38 +40,7 @@
     <Analyzer Include="F:\UnityEditor\2022.3.4f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerInt3.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Importer\SubstanceImporter.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Utilities\EditorDrawUtilities.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\SubstanceFileEditor.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Utilities\SubstanceBuildUtils.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\SubstanceEditorEngine.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Utilities\GraphInputsGroupingHelper.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawer.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\SubstanceGraphSOEditor.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Utilities\AssetCreationUtils.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\GUIContent\SubstanceInputGUIContent.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerInt2.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Utilities\TextureUtils.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Extensions\SubstanceGraphSOExtensions.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Project Settings Editor\SubstanceEditorSettingsSO.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Package\UnityPackageInfo.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Utilities\SubstanceEditorTools.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Extensions\PhysicalSizeExtension.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerString.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Project Settings Editor\SubstanceEditorSettingsProvider.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerFloat2.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerFloat3.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerFloat.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\GUIContent\SubstanceNumericalInputGUIContent.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Utilities\EditorTools.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Importer\SubstanceImporterEditor.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerInt4.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\Project Settings Editor\Extensions.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerInt.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerFloat4.cs" />
-     <Compile Include="Assets\Adobe\Substance3DForUnity\Editor\Scripts\PropertyDrawers\SubstanceInputDrawerTexture.cs" />
-     <None Include="Assets\Adobe\Substance3DForUnity\Editor\Adobe.Substance.Editor.asmdef" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\Editor\ChatEditor.cs" />
     <Reference Include="UnityEngine">
         <HintPath>F:\UnityEditor\2022.3.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -756,27 +725,138 @@
     <Reference Include="System.Xml.XPath.XDocument">
         <HintPath>F:\UnityEditor\2022.3.4f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.TestRunner">
         <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
         <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\UnityEngine.TestRunner.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.State">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VSCode.Editor">
+        <HintPath>F:\Madcamp_Week3\Madcamp_Week3\assetTest\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{e14782ca-88f1-3d44-ef12-7e2e0ea4acd9}</Project>
+      <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
+      <Project>{7c85e744-928d-881b-d844-8814f0473f6d}</Project>
+      <Name>PhotonUnityNetworking.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
+      <Project>{88a7a9c8-0d4a-056f-b864-cb7b80063092}</Project>
+      <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Adobe.SubstanceEditor.csproj">
+      <Project>{e8c25769-0955-a7ea-4978-c37bb5e0d35d}</Project>
+      <Name>Adobe.SubstanceEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Adobe.Substance.csproj">
       <Project>{12fc5219-0392-c967-4f4f-68073855bd2e}</Project>
       <Name>Adobe.Substance</Name>
     </ProjectReference>
+    <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
+      <Project>{14f13c50-52c1-5dbf-b6f2-1e302a2a9ff9}</Project>
+      <Name>PunDemos.DemoSlotcarEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonRealtime.csproj">
+      <Project>{e5722337-0a34-de98-4954-6724be7f6b1c}</Project>
+      <Name>PhotonRealtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonChat.csproj">
+      <Project>{0fb05679-6bb3-1b24-2336-fc071c709f3a}</Project>
+      <Name>PhotonChat</Name>
+    </ProjectReference>
     <ProjectReference Include="Adobe.Substance.Runtime.csproj">
       <Project>{1c8976e9-85c6-5bf4-e142-d4935e3ceb40}</Project>
       <Name>Adobe.Substance.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.csproj">
+      <Project>{0c284688-7a6b-279a-f600-ae30b6af7763}</Project>
+      <Name>PhotonUnityNetworking</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
+      <Project>{ca2e73f5-5947-c43e-da7b-6603b0cb8f39}</Project>
+      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
+      <Project>{86dd8e63-cd4a-8185-77e2-4e8be9015416}</Project>
+      <Name>PhotonUnityNetworking.Demos</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
+      <Project>{5e4ad2ec-f6f1-f719-4cd8-9940b53a2e13}</Project>
+      <Name>PhotonUnityNetworking.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="PunDemos.DemoHubEditor.csproj">
+      <Project>{cf51f8b4-b816-af69-0334-6c303c505e97}</Project>
+      <Name>PunDemos.DemoHubEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
