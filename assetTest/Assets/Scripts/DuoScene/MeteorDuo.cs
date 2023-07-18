@@ -65,14 +65,13 @@ public class MeteorDuo : MonoBehaviourPun
                 photonView.RPC("changeIsShot", RpcTarget.All);
                 Debug.Log("shot");
             }
-
-            // 만약 플레이어가 메테오에 맞으면, 게임 오버가 된다.
-            else if (other.gameObject.CompareTag("Player") && isShot == false)
+        }
+        // 만약 플레이어가 메테오에 맞으면, 게임 오버가 된다.
+        if (other.gameObject.CompareTag("Player") && isShot == false)
             {
                 GameManagerDuo.isGameOver = true;
                 Debug.Log("Game Over");
             }
-        }
         
     }
 

@@ -41,7 +41,8 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
         PhotonNetwork.SendRate = 60;
 
         // 포톤 서버에 접속 (및 자동으로 로비에 입장)
-        PhotonNetwork.ConnectUsingSettings();
+        if (!PhotonNetwork.IsConnectedAndReady) PhotonNetwork.ConnectUsingSettings();    
+        else PhotonNetwork.JoinLobby();    
     }
 
 

@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class GameManagerDuo : MonoBehaviour
+public class GameManagerDuo : MonoBehaviourPunCallbacks
 {
     public static float timeSurvived; // 버틴 시간
     public static int gameScore; // 게임 점수
     public static int bulletCount; // 남은 총알 개수
     public static bool isGameOver; // 게임 종료 여부
+    int gameOverCount;
     public static bool isReloading; // 현재 장전중인지 아닌지
 
     public static bool isMeteorSpawn = true; // 메테오를 스폰할 것인지 아닌지
@@ -37,7 +38,7 @@ public class GameManagerDuo : MonoBehaviour
     void Start()
     {
         // 플레이어를 생성한다.
-        int pos = PhotonNetwork.IsMasterClient ? 5 : -5;
+        int pos = PhotonNetwork.IsMasterClient ? 3 : -3;
         PhotonNetwork.Instantiate("BananaManDuo", new Vector3(pos, 0, pos), Quaternion.identity);
 
         Time.timeScale = 1f;
@@ -49,6 +50,14 @@ public class GameManagerDuo : MonoBehaviour
 
         exitButton.onClick.AddListener(OnClickExitButton);
         restartButton.onClick.AddListener(OnClickRestartButton);
+
+        subCamObj.SetActive(false);
+        pauseUI.SetActive(false);
+        player.SetActive(true);
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = mainCam;
+
+        gameOverCount = 0;
     }
 
     // Update is called once per frame
@@ -60,7 +69,7 @@ public class GameManagerDuo : MonoBehaviour
         }
 
         // ESC 눌렀을 시 pause
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (!isGameOver && Input.GetKeyDown(KeyCode.Escape)) {
             if (pauseUI.activeSelf) {
                 subCamObj.SetActive(false);
                 pauseUI.SetActive(false);
@@ -78,26 +87,35 @@ public class GameManagerDuo : MonoBehaviour
             }
         }
 
-        if (isGameOver) {
+        if (isGameOver && gameOverCount == 0) {
             GameOver();
+            gameOverCount = 1;
         }
     }
 
     void OnClickExitButton() {
-        Application.Quit();
+        //Application.Quit();
+        Time.timeScale = 1f;
+        PhotonNetwork.LeaveRoom();
     }
 
     void GameOver() {
+        Debug.Log(PhotonNetwork.NetworkClientState);
+        overUI.SetActive(true);
+        player.SetActive(false);
         subCamObj.SetActive(true);
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = subCam;
-        overUI.SetActive(true);
-        player.SetActive(false);
         Time.timeScale = 0f;
     }
 
     void OnClickRestartButton() {
         Time.timeScale = 1f;
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom() {
+        Debug.Log("정상적으로 게임에서 나왔다.");
         SceneManager.LoadScene("StartScene");
     }
 }
