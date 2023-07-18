@@ -39,11 +39,10 @@ public class Player : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update() 
     {
-        // if (PV.IsMine) // 나의 것이다.
-        // { 
-        //     PV.RPC("synchronize", RpcTarget.All); 
-        // }
-        synchronize();
+        if (PV.IsMine) // 나의 것이다.
+        { 
+            PV.RPC("synchronize", RpcTarget.All); 
+        }
     }
 
     [PunRPC]
