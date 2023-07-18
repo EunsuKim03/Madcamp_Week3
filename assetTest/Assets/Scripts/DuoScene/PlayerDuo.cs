@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class PlayerDuo : MonoBehaviourPunCallbacks, IPunObservable
 {
     float mouseX = 0f;
+    float mouseSpeed = StartSceneManager.mouseSpeed;
 
     public Animator playerAnimator;
 
@@ -49,7 +50,7 @@ public class PlayerDuo : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (PV.IsMine) // 나의 것이다.
         { 
-            mouseX += Input.GetAxis("Mouse X") * 10;
+            mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
             transform.eulerAngles = new Vector3(0, mouseX, 0); 
 
             // 마우스 왼쪽 버튼 클릭 시 총알이 날라간다.
