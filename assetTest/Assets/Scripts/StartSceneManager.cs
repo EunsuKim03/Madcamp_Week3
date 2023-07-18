@@ -54,7 +54,7 @@ public class StartSceneManager : MonoBehaviour {
     }
 
     private void OnDuoButtonClick() {
-        SceneManager.LoadScene("jiwoo");
+        SceneManager.LoadScene("RoomScene");
     }
 
     private void OnBackButtonClick() {
