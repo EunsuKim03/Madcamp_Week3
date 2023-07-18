@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 
 public class MeteorSpawn : MonoBehaviour
 {
@@ -33,8 +31,6 @@ public class MeteorSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.isMeteorSpawn) this.gameObject.SetActive(false); // 메테오 스폰을 하지 않는다.
-
         spawnTime += Time.deltaTime;
 
         // 스폰 주기가 되면 메테오를 스폰하고 스폰 시간을 초기화한다.
@@ -72,8 +68,8 @@ public class MeteorSpawn : MonoBehaviour
 
         // meteorFactory에서 메테오를 하나 선택해서 생성한다.
         // 생성 위치는 randEnemyPos, 회전 방향은 기본값이다.
-        int rand = Random.Range(0, 4) + 1;
-        GameObject enemy = PhotonNetwork.Instantiate($"Meteor{rand}", randEnemyPos, Quaternion.identity);
+        int rand = Random.Range(0, 4);
+        GameObject enemy = Instantiate(meteorFactory[rand], randEnemyPos, Quaternion.identity);
 
         // 메테오가 구의 중심을 향해 날아가도록 한다. 
         enemy.transform.forward = meteorSpawnPosition - randEnemyPos;

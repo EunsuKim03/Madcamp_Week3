@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+public class GameManagerDuo : MonoBehaviour
 {
     public static float timeSurvived; // 버틴 시간
     public static int gameScore; // 게임 점수
@@ -34,6 +36,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 플레이어를 생성한다.
+        int pos = PhotonNetwork.IsMasterClient ? 5 : -5;
+        PhotonNetwork.Instantiate("BananaManDuo", new Vector3(pos, 0, pos), Quaternion.identity);
+
         Time.timeScale = 1f;
         timeSurvived = 0;
         gameScore = 0;

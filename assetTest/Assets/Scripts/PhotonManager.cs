@@ -10,7 +10,7 @@ using Photon.Realtime;
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     private readonly string version = "1.0"; // 이 게임의 버전
-    private string userId = "Player B";
+    private string userId;
 
     public Button enterButton; // 로비에서 방에 입장
     public Button backButton; // 로비에서 메뉴로 이동
@@ -38,7 +38,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.NickName = userId;
 
         // 포톤 서버와의 통신 속도 확인 (기본값: 초당 30회)
-        Debug.Log(PhotonNetwork.SendRate);
+        PhotonNetwork.SendRate = 60;
 
         // 포톤 서버에 접속 (및 자동으로 로비에 입장)
         PhotonNetwork.ConnectUsingSettings();
@@ -80,6 +80,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         loading.SetActive(true);
         enterButton.gameObject.SetActive(false);
         backButton.gameObject.SetActive(false);
+
+        userId = Random.Range(0, 100).ToString();
+        PhotonNetwork.LocalPlayer.NickName = userId;
     }
 
     private void OnEnterButtonClick() { // 로비 -> 방

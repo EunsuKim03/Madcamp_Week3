@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 // Rigidbody는 힘과 토크를 받아 오브젝트가 사실적으로 움직인다. (물리 속성 부여)
 [RequireComponent(typeof(Rigidbody))]
 
 // 총알이 생성되면 앞으로 날라간다.
-public class Bullet : MonoBehaviour
+public class BulletDuo : MonoBehaviourPun
 {
     // 총알이 날라가는 속도
     public float bulletSpeed = 1000;
@@ -31,11 +33,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-/*
+
     private void OnTriggerEnter(Collider other) {
-        // 만약 총알이 벽이나 바닥에 닿으면, 1초 뒤에 이 총알을 삭제한다.
-        if (other.gameObject.CompareTag("Wall")) {
-            Destroy(gameObject, 1);
+        // 만약 총알이 메테오를 맞추면, 이 총알을 삭제한다.
+        if (photonView.IsMine && other.gameObject.CompareTag("Meteor")) {
+            PhotonNetwork.Destroy(gameObject);
         }
-    }*/
+    }
 }
