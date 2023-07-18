@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.46613812, g: 0.46583676, b: 0.4619301, a: 1}
+  m_IndirectSpecularColor: {r: 0.4660946, g: 0.46579224, b: 0.46188897, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -486,6 +486,8 @@ MonoBehaviour:
   exitButton: {fileID: 1664838473}
   overUI: {fileID: 2025859145}
   restartButton: {fileID: 1144762559}
+  duoObject: {fileID: 11400000, guid: 7ad779c7642c2db499ce5a9b067f7239, type: 2}
+  URL: {fileID: 11400000, guid: 1557980c773d0804e824ba1420741dc7, type: 2}
 --- !u!1 &102937406
 GameObject:
   m_ObjectHideFlags: 0

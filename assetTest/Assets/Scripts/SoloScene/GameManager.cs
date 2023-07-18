@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        userObject.id = PlayerPrefs.GetString("id", "DefaultID");
+        userObject.solo = PlayerPrefs.GetInt("solo", 0);
+
+        Debug.Log(userObject.id);
         Time.timeScale = 1f;
         timeSurvived = 0;
         gameScore = 0;
