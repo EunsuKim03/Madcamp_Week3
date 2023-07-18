@@ -8,8 +8,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 {
     private readonly string version = "1.0"; // 이 게임의 버전
     private string userId = "Player A";
-
-    // 같은 룸의 유저들에게 자동으로 씬을 로딩한다.
+    
     private void Awake() {
         // 같은 룸의 유저들에게 자동으로 씬을 로딩한다.
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -17,15 +16,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = version;
         // 유저 아이디 할당
         PhotonNetwork.NickName = userId;
-        // 포톤 서버와의 통신 속도 확인 (초당 30회)
+        // 포톤 서버와의 통신 속도 확인 (기본값: 초당 30회)
         Debug.Log(PhotonNetwork.SendRate);
-        // 서버 접속
+        // 포톤 서버에 접속
         PhotonNetwork.ConnectUsingSettings();
+        // public void connectServer() {PhotonNetwork.ConnectUsingSettings();}
     }
 
     // 포톤 서버에 접속하면 호출되는 콜백 함수
     public override void OnConnectedToMaster()
     {
+        // PhotonNetwork.LocalPlayer.NickName = NickNameInput.text; (public InputField NickNameInput)
         Debug.Log("Connected to Master");
         Debug.Log($"PhotonNetwork.InLobby = {PhotonNetwork.InLobby}"); // false
         PhotonNetwork.JoinLobby(); // 이제 로비에 입장한다.
@@ -68,13 +69,27 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log($"Player Count = {PhotonNetwork.CurrentRoom.PlayerCount}");
 
         // 플레이어 생성
-        PhotonNetwork.Instantiate("BananaMan", Vector3.zero, Quaternion.identity);
+        float rand = Random.Range(-10f, 10f);
+        PhotonNetwork.Instantiate("BananaMan", new Vector3(rand, 0, rand), Quaternion.identity);
 
         // 룸에 접속한 사용자들의 정보 확인
         foreach (var player in PhotonNetwork.CurrentRoom.Players) {
             Debug.Log($"{player.Value.NickName}, {player.Value.ActorNumber}"); // 닉네임, 고유id
         }
+
+        // DisconnectedPanel.SetActive(false); (public GameObject DisconnectedPanel)
     }
+
+     void disconnect() {
+        if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) {
+            PhotonNetwork.Disconnect();
+        }
+    } 
+    
+/*    public override void OnDisconnected(DisconnectCasue cause) {
+        DisconnectPanel.SetActive(true);
+        RespawnPanel.SetActive(false);
+    }*/
 
     // Start is called before the first frame update
     void Start()
