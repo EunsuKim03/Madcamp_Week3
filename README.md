@@ -96,3 +96,10 @@
 
 - 듀오: 레디
 
+<img src="https://github.com/EunsuKim03/Madcamp_Week3/assets/111746601/937b5fea-0b7c-4a65-a874-04238c8f4a41" width="560" height="315"/>
+
+- 듀오: 플레이 (1)
+
+<img src="https://github.com/EunsuKim03/Madcamp_Week3/assets/111746601/42fac228-b7a9-476f-9444-b4b84cb370cc" width="560" height="315"/>
+
+- 듀오: 플레이 (2)
