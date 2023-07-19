@@ -33,6 +33,9 @@ public class PlayerDuo : MonoBehaviourPunCallbacks, IPunObservable
     public Camera camera;
     public GameObject meteorSpawn;
 
+    // Sound
+    public AudioSource shotSound;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -111,6 +114,7 @@ public class PlayerDuo : MonoBehaviourPunCallbacks, IPunObservable
     // 투사체 방식으로 날라가는 총알
     [PunRPC]
     public void shotBullet() {
+        shotSound.Play();
         gunFire.SetActive(true);
         Invoke("DisableGunFire", 0.5f);
         

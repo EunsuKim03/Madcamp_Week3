@@ -37,6 +37,10 @@ public class GameManagerDuo : MonoBehaviourPunCallbacks
     public DuoObject duoObject;
     public UrlObject URL;
 
+    // Sound
+    public AudioSource bgmSource;
+    public AudioSource buttonSource;
+
 
 
     // Start is called before the first frame update
@@ -63,6 +67,7 @@ public class GameManagerDuo : MonoBehaviourPunCallbacks
         canvas.worldCamera = mainCam;
 
         gameOverCount = 0;
+        bgmSource.Play();
     }
 
     // Update is called once per frame
@@ -100,11 +105,13 @@ public class GameManagerDuo : MonoBehaviourPunCallbacks
 
     void OnClickExitButton() {
         //Application.Quit();
+        buttonSource.Play();
         Time.timeScale = 1f;
         PhotonNetwork.LeaveRoom();
     }
 
     void GameOver() {
+        bgmSource.Stop();
         Debug.Log(PhotonNetwork.NetworkClientState);
         overUI.SetActive(true);
         subCamObj.SetActive(true);
@@ -135,6 +142,7 @@ public class GameManagerDuo : MonoBehaviourPunCallbacks
     }
 
     void OnClickRestartButton() {
+        buttonSource.Play();
         Time.timeScale = 1f;
         PhotonNetwork.LeaveRoom();
     }

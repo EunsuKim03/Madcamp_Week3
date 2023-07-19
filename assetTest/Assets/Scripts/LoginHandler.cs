@@ -36,6 +36,10 @@ public class LoginHandller : MonoBehaviour {
     public Button registerDone;
     public Button registerBack;
 
+    // Sound
+    public AudioSource audioSource;
+    public AudioClip buttonSound;
+
     void Awake() {
         User.id = "";
         User.solo = 0;
@@ -47,6 +51,7 @@ public class LoginHandller : MonoBehaviour {
         registerDone.onClick.AddListener(OnRegisterButtonClicked);
         loginBack.onClick.AddListener(OnBackClicked);
         registerBack.onClick.AddListener(OnBackClicked);
+        audioSource.clip = buttonSound;
     }
 
     // Menu Functions
@@ -55,6 +60,7 @@ public class LoginHandller : MonoBehaviour {
         loginUI.SetActive(false);
         registerUI.SetActive(true);
         menuUI.SetActive(false);
+        audioSource.Play();
     }
 
     void OnMoveToLoginClicked() {
@@ -62,6 +68,7 @@ public class LoginHandller : MonoBehaviour {
         loginUI.SetActive(true);
         registerUI.SetActive(false);
         menuUI.SetActive(false);
+        audioSource.Play();
     }
 
     void OnBackClicked() {
@@ -69,6 +76,7 @@ public class LoginHandller : MonoBehaviour {
         loginUI.SetActive(false);
         registerUI.SetActive(false);
         menuUI.SetActive(true);
+        audioSource.Play();
     }
     
 
@@ -82,6 +90,7 @@ public class LoginHandller : MonoBehaviour {
         password = password.Substring(0, password.Length - 1);
 
         PerformLogin(id, password);   
+        audioSource.Play();
         Invoke("delay", 1.0f);
     }
 
@@ -130,6 +139,7 @@ public class LoginHandller : MonoBehaviour {
         password = password.Substring(0, password.Length - 1);
 
         PerformRegister(id, password);
+        audioSource.Play();
         Invoke("delay", 1.0f);
     }
 

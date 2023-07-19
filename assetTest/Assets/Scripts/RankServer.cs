@@ -16,13 +16,19 @@ public class RankServer : MonoBehaviour {
 
     public TextMeshProUGUI[] duoTexts;
 
+    // Sound
+    public AudioSource audioSource;
+    public AudioClip buttonSound;
+
     // Start is called before the first frame update
     void Start() {
+        audioSource.clip = buttonSound;
         LoadRank();
         backButton.onClick.AddListener(OnBackClicked);
     }
 
     void OnBackClicked() {
+        audioSource.Play();
         SceneManager.LoadScene("StartScene");
     }
 

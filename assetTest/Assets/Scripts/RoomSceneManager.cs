@@ -30,6 +30,9 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
     public DuoObject duoObject;
     public UserObject userObject;
     public UrlObject URL;
+
+    // Sound
+    public AudioSource audioSource;
     
 
     private void Awake() 
@@ -98,16 +101,19 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
     }
 
     private void OnEnterButtonClick() { // 로비 -> 방
+        audioSource.Play();
         PhotonNetwork.JoinRandomRoom(); // 랜덤 룸에 접속한다.
 
         // 룸 접속에 실패할 수 있으므로, OnJoinedRoom()에서 나머지를 처리한다.
     }
 
     private void OnBackButtonClick() { // 로비 -> 메뉴
+        audioSource.Play();
         PhotonNetwork.LeaveLobby();
     }
 
     private void OnReadyButtonClick() { // 방 -> 레디
+        audioSource.Play();
         if (Player1Name.text == userObject.id) { // 내가 첫 번째이다.
             if (ready1.activeSelf) {
                 ready1.SetActive(false); // 이미 레디를 했었으므로 해제한다.
@@ -132,11 +138,13 @@ public class RoomSceneManager : MonoBehaviourPunCallbacks
     }
 
     private void OnExitButtonClick() { // 방 -> 로비
+        audioSource.Play();
         PhotonNetwork.LeaveRoom();
     }
 
     private void OnStartButtonClick() { // 방 -> 게임 시작
         if (true) {//PhotonNetwork.IsMasterClient && ready1.activeSelf && ready2.activeSelf) { // 내가 방장이고, 두 플레이어가 모두 레디를 해야 한다.
+            audioSource.Play();
             photonView.RPC("StartGame", RpcTarget.All);
         } 
     }

@@ -68,7 +68,6 @@
      <Compile Include="Assets\Scripts\UserObject.cs" />
      <Compile Include="Assets\Scripts\SoloScene\GunOrientation.cs" />
      <Compile Include="Assets\Scripts\DuoScene\MeteorSpawnDuo.cs" />
-     <Compile Include="Assets\Scripts\PhotonManager.cs" />
      <Compile Include="Assets\Scripts\Protocols.cs" />
      <Compile Include="Assets\Scripts\DuoScene\PlayerDuo.cs" />
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />

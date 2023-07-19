@@ -18,8 +18,13 @@ public class StartSceneManager : MonoBehaviour {
     public GameObject ModeUI;
     public GameObject Title;
 
+    // Sound
+    public AudioSource audioSource;
+    public AudioClip buttonSound;
+
 
     private void Start() {
+        audioSource.clip = buttonSound;
         // startButton = GetComponentInChildren<Button>();
         if (startButton != null) {
             startButton.onClick.AddListener(OnStartButtonClick);
@@ -61,9 +66,11 @@ public class StartSceneManager : MonoBehaviour {
     private void OnStartButtonClick() {
         StartUI.SetActive(false);
         ModeUI.SetActive(true);
+        audioSource.Play();
     }
 
     private void OnRankButtonClick() {
+        audioSource.Play();
         SceneManager.LoadScene("RankScene");
     }
 
@@ -71,6 +78,7 @@ public class StartSceneManager : MonoBehaviour {
         Title.SetActive(false);
         StartUI.SetActive(false);
         SenseUI.SetActive(true);
+        audioSource.Play();
     }
 
     private void OnReturnButtonClick() {
@@ -78,18 +86,22 @@ public class StartSceneManager : MonoBehaviour {
         Title.SetActive(true);
         SenseUI.SetActive(false);
         StartUI.SetActive(true);
+        audioSource.Play();
     }
 
     private void OnSoloButtonClick() {
+        audioSource.Play();
         SceneManager.LoadScene("GameScene");
     }
 
     private void OnDuoButtonClick() {
+        audioSource.Play();
         SceneManager.LoadScene("RoomScene");
     }
 
     private void OnBackButtonClick() {
         ModeUI.SetActive(false);
         StartUI.SetActive(true);
+        audioSource.Play();
     }
 }

@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     float reloadTime; // 장전하느라 소비 중인 시간
 
     public GameObject meteorSpawn;
+    
+    // Sound
+    public AudioSource shotSound;
 
 
     // Start is called before the first frame update
@@ -70,6 +73,7 @@ public class Player : MonoBehaviour
     // 투사체 방식으로 날라가는 총알
     public void shotBullet() {
         gunFire.SetActive(true);
+        shotSound.Play();
         Invoke("DisableGunFire", 0.5f);
         
         // bulletFactory에서 bullet을 하나 생성한다.
