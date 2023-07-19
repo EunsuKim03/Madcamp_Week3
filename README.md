@@ -1,5 +1,13 @@
-# Madcamp_Week3
-Madcamp Week3: 김은수, 정지우
+# WELCOME TO THE EARTH
+
+- 날짜
+  - Madcamp Week3 (23.07.13 ~ 23.07.19)
+- 개발자
+  - 3분반 김은수, 정지우
+- 개발 환경
+  - Unity, Node.js, MongoDB, ngrok
+- 장르
+  - .exe 게임
 
 ## 게임 사진
 <img src="https://github.com/EunsuKim03/Madcamp_Week3/assets/111746601/0c8881da-bf25-4a40-8330-414bc3f0a048" width="560" height="315"/>
