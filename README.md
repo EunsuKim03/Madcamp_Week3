@@ -11,7 +11,8 @@
   - Unity, PUN2, Node.js, MongoDB, ngrok
 - 장르
   - .exe 게임   
-  다운로드: <https://drive.google.com/file/d/1wGu1_FD6HNtBhesXtbfLplWiM28hQ74G/view?usp=sharing>   
+- 다운로드
+  - <https://drive.google.com/file/d/1wGu1_FD6HNtBhesXtbfLplWiM28hQ74G/view?usp=sharing>   
     (압축 해제 후 실행)
 
 ## 게임 사진
