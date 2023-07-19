@@ -37,6 +37,7 @@ public class RankServer : MonoBehaviour {
 
         StartCoroutine(RankMain.GetRank_Id(url, (raw) =>
         {
+            Debug.Log(raw);
             SoloData[] res = JsonConvert.DeserializeObject<SoloData[]>(raw);
         
             Debug.LogFormat("GetAll_Id Result:\n");
