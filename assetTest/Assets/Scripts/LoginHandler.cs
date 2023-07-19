@@ -7,6 +7,10 @@ using Newtonsoft.Json;
 using UnityEngine.SceneManagement;
 
 public class LoginHandller : MonoBehaviour {
+
+    // Title
+    public GameObject title;
+
     // Data
     public UrlObject URL;
     public UserObject User;
@@ -47,18 +51,21 @@ public class LoginHandller : MonoBehaviour {
 
     // Menu Functions
     void OnMoveToRegisterClicked() {
+        title.SetActive(false);
         loginUI.SetActive(false);
         registerUI.SetActive(true);
         menuUI.SetActive(false);
     }
 
     void OnMoveToLoginClicked() {
+        title.SetActive(false);
         loginUI.SetActive(true);
         registerUI.SetActive(false);
         menuUI.SetActive(false);
     }
 
     void OnBackClicked() {
+        title.SetActive(true);
         loginUI.SetActive(false);
         registerUI.SetActive(false);
         menuUI.SetActive(true);
