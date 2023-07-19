@@ -1,7 +1,9 @@
 # WELCOME TO THE EARTH
 
-> 사방에서 날라오는 메테오를 맞춰서 오랫동안 살아남으세요!  
-> 혼자서 또는 둘이서 함께 플레이할 수 있습니다!  
+사방에서 날라오는 메테오를 맞춰서 오랫동안 살아남으세요!  
+혼자서 또는 둘이서 함께 플레이할 수 있습니다!    
+  
+## 소개
 
 - 날짜
   - Madcamp Week3 (23.07.13 ~ 23.07.19)
@@ -13,8 +15,8 @@
   - .exe 게임   
 - 다운로드
   - <https://drive.google.com/file/d/1wGu1_FD6HNtBhesXtbfLplWiM28hQ74G/view?usp=sharing>   
-    (압축 해제 후 실행)
-
+    (압축 해제 후 실행)  
+  
 ## 게임 사진
 <img src="https://github.com/EunsuKim03/Madcamp_Week3/assets/111746601/0c8881da-bf25-4a40-8330-414bc3f0a048" width="560" height="315"/>
 
