@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     public UserObject userObject; // 유저 정보
     public UrlObject URL; // URL 정보
 
+    // Sound
+    public AudioSource bgmSource;
+    public AudioSource buttonSource;
+    // public AudioSource overSource;
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +55,8 @@ public class GameManager : MonoBehaviour
 
         exitButton.onClick.AddListener(OnClickExitButton);
         restartButton.onClick.AddListener(OnClickRestartButton);
+
+        bgmSource.Play();
 
     }
 
@@ -83,10 +90,13 @@ public class GameManager : MonoBehaviour
     }
 
     void OnClickExitButton() {
+        buttonSource.Play();
         SceneManager.LoadScene("StartScene");
     }
 
     void GameOver() {
+        // overSource.Play();
+        bgmSource.Stop();
         subCamObj.SetActive(true);
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = subCam;
@@ -120,6 +130,7 @@ public class GameManager : MonoBehaviour
     }
 
     void OnClickRestartButton() {
+        buttonSource.Play();
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartScene");
     }

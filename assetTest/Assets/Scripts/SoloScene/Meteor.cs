@@ -17,6 +17,8 @@ public class Meteor : MonoBehaviour
     public GameObject body; // 메테오 몸체
     bool isShot = false;
 
+    public AudioSource explosionSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,7 @@ public class Meteor : MonoBehaviour
         // 만약 총알이 적을 맞추면, 점수가 올라가고 적이 사라진다.
         if (other.gameObject.CompareTag("Bullet"))
         {
+            explosionSound.Play();
             int meteorScore = (int) (1000 / (meteorScale * meteorScale)); // 메테오의 크기가 클수록 점수가 작다.
             if (!isShot) GameManager.gameScore += meteorScore; // 점수 증가
             isShot = true;
