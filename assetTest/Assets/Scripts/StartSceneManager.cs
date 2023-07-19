@@ -16,6 +16,7 @@ public class StartSceneManager : MonoBehaviour {
     public GameObject StartUI;
     public GameObject SenseUI;
     public GameObject ModeUI;
+    public GameObject Title;
 
 
     private void Start() {
@@ -67,12 +68,14 @@ public class StartSceneManager : MonoBehaviour {
     }
 
     private void OnSenseButtonClick() {
+        Title.SetActive(false);
         StartUI.SetActive(false);
         SenseUI.SetActive(true);
     }
 
     private void OnReturnButtonClick() {
         mouseSpeed = senseBar.value;
+        Title.SetActive(true);
         SenseUI.SetActive(false);
         StartUI.SetActive(true);
     }
