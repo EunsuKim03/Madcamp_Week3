@@ -5,7 +5,7 @@
 - 개발자
   - 3분반 김은수, 정지우
 - 개발 환경
-  - Unity, Node.js, MongoDB, ngrok
+  - Unity, PUN2, Node.js, MongoDB, ngrok
 - 장르
   - .exe 게임
 
