@@ -80,6 +80,7 @@ public class LoginHandller : MonoBehaviour {
 
     void PerformLogin(string id, string password) {
         var url = string.Format("{0}/{1}", URL.host, URL.urlLogin);
+        Debug.Log(url);
 
         var req = new Protocols.Packets.req_Login();
         req.id = id;

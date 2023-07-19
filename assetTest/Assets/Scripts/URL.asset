@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94624f1e712ead4fb81b857fb197407, type: 3}
   m_Name: URL
   m_EditorClassIdentifier: 
-  host: localhost:3000
+  host: https://262d-192-249-19-234.ngrok-free.app
   urlGetAll_Id: id
   urlGetAll_Duo: duo
   urlLogin: id/login
