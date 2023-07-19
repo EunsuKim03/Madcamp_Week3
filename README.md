@@ -10,7 +10,8 @@
 - 개발 환경
   - Unity, PUN2, Node.js, MongoDB, ngrok
 - 장르
-  - .exe 게임
+  - .exe 게임   
+  다운로드: <https://drive.google.com/file/d/1wGu1_FD6HNtBhesXtbfLplWiM28hQ74G/view?usp=sharing> (압축 해제 후 실행)
 
 ## 게임 사진
 <img src="https://github.com/EunsuKim03/Madcamp_Week3/assets/111746601/0c8881da-bf25-4a40-8330-414bc3f0a048" width="560" height="315"/>
